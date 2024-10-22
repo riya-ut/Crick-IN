@@ -13,7 +13,7 @@ Game::Game() {
     players[5] = "Dhawan";
     players[6] = "Pant";
     players[7] = "Karthik";
-    players[8] = "KLRahu
+    players[8] = "KLRahu";
     players[9] = "Hardik";
     players[10] = "Jadeja";
 
