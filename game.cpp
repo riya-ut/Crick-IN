@@ -1,4 +1,6 @@
+#include <iostream>
 #include "game.h"
+using namespace std;
 
 Game::Game() {
     PlayersPerTeam = 4;
@@ -37,3 +39,33 @@ void Game::displayInstructions() {
     std::cout << "3. Each innings will be of 6 balls.\n";
     std::cout << "=============================================================================\n";
 }
+
+void Game:: showAllPlayers() {
+
+    cout << endl;
+    cout << "----------------------------------" << endl;
+    cout << "=========Pool of Players==========" << endl;
+    cout << "----------------------------------" << endl;
+    cout << endl;
+
+    for (int i = 0; i < totalPlayers; i++)
+    {
+        cout <<"\t\t["<< i << "]" << players [i] << endl;
+    }
+}
+
+int Game :: takeIntegerInput() {
+
+    int n;
+
+    while (!(cin >> n))
+    {
+        cin.clear();            // Clear any error flags that may have been set on cin
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');        // Clear input buffer until newline
+        cout << "Invalid input! Please try again with a valid input: ";
+    }
+
+    return n; 
+    
+}
+

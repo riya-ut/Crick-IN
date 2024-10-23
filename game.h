@@ -5,9 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
-#include <string>
-#include <vector>
-#include "team.h" 
+#include "team.h"   //"player.h", <string>, <vector>
 
 class Game {
 public:
@@ -24,6 +22,8 @@ public:
     Game();
     void displayWelcomeMessage();
     void displayInstructions();
+    void showAllPlayers();
+    int takeIntegerInput();
     
 };
 
