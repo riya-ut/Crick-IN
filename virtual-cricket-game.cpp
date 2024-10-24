@@ -9,6 +9,11 @@ int main() {
     getchar();
 
     game.showAllPlayers();
+
+    cout <<"\nPress Enter to Continue";
+    getchar();
+
+    game.selectPlayers();
     
     return 0;
 }

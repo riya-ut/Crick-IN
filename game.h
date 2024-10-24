@@ -24,7 +24,8 @@ public:
     void displayInstructions();
     void showAllPlayers();
     int takeIntegerInput();
-    
+    void selectPlayers();
+    bool validateSelectPlayer(int);
 };
 
 #endif // GAME_H

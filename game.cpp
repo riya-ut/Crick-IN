@@ -69,3 +69,67 @@ int Game :: takeIntegerInput() {
     
 }
 
+void Game::selectPlayers() {
+    cout << endl;
+    cout << "------------------------------------------------" << endl;
+    cout << "|========== Create Team-A and Team-B ==========|" << endl;
+    cout << "------------------------------------------------" << endl;
+    
+    for (int i = 0; i < PlayersPerTeam; i++)
+    
+        {
+        //Add player to TeamA 
+
+        teamASelection:
+            cout << endl << "Select players" << i + 1 << "of Team A-";
+
+            int playerIndexTeamA = takeIntegerInput ();
+
+            if (playerIndexTeamA < 0 || playerIndexTeamA >10)
+            {
+                cout << endl << "Please select from the given players" << endl;
+                goto teamASelection;
+            } else if (!validateSelectPlayer (playerIndexTeamA))
+            {
+                cout << endl << "Please select from the given players" << endl;
+                goto teamASelection;
+            }
+            
+            else {
+                Player teamAPlayer;
+                teamAPlayer.id = playerIndexTeamA;
+                teamAPlayer.name = players [playerIndexTeamA];
+                teamA.players.push_back(teamAPlayer);
+
+            }
+
+            // Add player to team B 
+            
+            teamBSelection:
+            cout << endl << "Select player" << i+1 << " of team B-";
+            int playerIndexTeamB = takeIntegerInput ();
+             if (playerIndexTeamB < 0 || playerIndexTeamB >10)
+            {
+                cout << endl << "Please select from the given players" << endl;
+                goto teamBSelection;
+            } else if (!validateSelectPlayer (playerIndexTeamA))
+            {
+                cout << endl << "Please select from the given players" << endl;
+                goto teamBSelection;
+            }
+             else {
+                Player teamBPlayer;
+                teamBPlayer.id = playerIndexTeamB;
+                teamBPlayer.name = players [playerIndexTeamB];
+                teamB.players.push_back(teamBPlayer);
+                    
+            }
+
+    }
+    
+}
+
+
+
+
+
