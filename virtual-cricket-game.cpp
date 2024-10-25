@@ -14,6 +14,7 @@ int main() {
     getchar();
 
     game.selectPlayers();
+    game.showTeamPlayers();
     
     return 0;
 }

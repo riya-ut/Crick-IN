@@ -69,6 +69,34 @@ int Game :: takeIntegerInput() {
     
 }
 
+bool Game:: validateSelectPlayer(int index) {
+    int n;
+    vector <Player>players;
+
+    players = teamA.players;
+    n= players.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (players[i].id == index)
+        {
+            return false;
+        }
+      
+    }
+    
+    players = teamB.players;
+    n= players.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (players[i].id == index)
+        {
+            return false;
+        }
+      
+    }
+
+    return true;
+}
 void Game::selectPlayers() {
     cout << endl;
     cout << "------------------------------------------------" << endl;
@@ -82,8 +110,7 @@ void Game::selectPlayers() {
 
         teamASelection:
             cout << endl << "Select players" << i + 1 << "of Team A-";
-
-            int playerIndexTeamA = takeIntegerInput ();
+            int playerIndexTeamA = takeIntegerInput();
 
             if (playerIndexTeamA < 0 || playerIndexTeamA >10)
             {
@@ -91,7 +118,7 @@ void Game::selectPlayers() {
                 goto teamASelection;
             } else if (!validateSelectPlayer (playerIndexTeamA))
             {
-                cout << endl << "Please select from the given players" << endl;
+                cout << endl << "Player has been already selected. Please select other player" << endl;
                 goto teamASelection;
             }
             
@@ -108,13 +135,14 @@ void Game::selectPlayers() {
             teamBSelection:
             cout << endl << "Select player" << i+1 << " of team B-";
             int playerIndexTeamB = takeIntegerInput ();
+
              if (playerIndexTeamB < 0 || playerIndexTeamB >10)
             {
                 cout << endl << "Please select from the given players" << endl;
                 goto teamBSelection;
-            } else if (!validateSelectPlayer (playerIndexTeamA))
+            } else if (!validateSelectPlayer (playerIndexTeamB))
             {
-                cout << endl << "Please select from the given players" << endl;
+                cout << endl << "Player has been already selected. Please select other player" << endl;
                 goto teamBSelection;
             }
              else {
@@ -123,11 +151,33 @@ void Game::selectPlayers() {
                 teamBPlayer.name = players [playerIndexTeamB];
                 teamB.players.push_back(teamBPlayer);
                     
-            }
+             }
 
     }
     
 }
+
+void Game::showTeamPlayers() {
+    vector<Player> teamAplayers = teamA.players;
+    vector<Player> teamBplayers = teamB.players;
+
+    cout << endl << endl;
+    cout << "--------------------------------------------------------------------" << endl;
+    cout << "|==========  Team-A  ==========|\t\t|==========  Team-B  ==========|" << endl;
+    cout << "--------------------------------------------------------------------" << endl;
+
+    for (int i = 0; i < PlayersPerTeam; i++)
+    {
+        cout << "|\t" << "["<<i<<"]" << teamAplayers [i]. name << "\t |"
+        << "\t\t"
+        << "|\t" << "["<<i<<"]" << teamBplayers [i]. name << "\t |" << endl;
+    }
+    cout<< "----------------------------------\t\t----------------------------------" << endl << endl;
+    
+}
+
+
+
 
 
 

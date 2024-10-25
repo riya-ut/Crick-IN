@@ -26,6 +26,7 @@ public:
     int takeIntegerInput();
     void selectPlayers();
     bool validateSelectPlayer(int);
+    void showTeamPlayers();
 };
 
 #endif // GAME_H
