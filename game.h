@@ -27,6 +27,12 @@ public:
     void selectPlayers();
     bool validateSelectPlayer(int);
     void showTeamPlayers();
+    void toss();
+    void tossChoice(Team);
+    void startFirstInnings();
+    void intializePlayers();
+    void bat();
+
 };
 
 #endif // GAME_H

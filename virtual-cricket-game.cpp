@@ -16,5 +16,14 @@ int main() {
     game.selectPlayers();
     game.showTeamPlayers();
     
+    cin.ignore (numeric_limits<streamsize>::max(), '\n');
+
+    cout << "\nPress Enter to toss";
+    getchar();
+
+    game.toss();
+
+    game.startFirstInnings();
+    
     return 0;
 }
