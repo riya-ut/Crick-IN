@@ -31,7 +31,10 @@ public:
     void tossChoice(Team);
     void startFirstInnings();
     void intializePlayers();
+    void playInnings();
     void bat();
+    bool validateInningsScore();
+
 
 };
 

@@ -275,6 +275,53 @@ void Game::playInnings() {
 	    	break;
 	    }
 	}
+
+}
+
+void Game::bat() {
+    srand(time(NULL));
+	int runsScored = rand() % 7;
+    // Update batting team and batsman score
+	batsman->runsScored = batsman->runsScored + runsScored;
+	battingTeam->totalRunsScored = battingTeam->totalRunsScored + runsScored;
+	batsman->ballsPlayed = batsman->ballsPlayed + 1;
+
+	// Update bowling team and bowler score
+	bowler->ballsBowled = bowler->ballsBowled + 1;
+	bowlingTeam->ballsBowled = bowlingTeam->ballsBowled + 1;
+	bowler->runsGiven = bowler->runsGiven + runsScored;
+    cout << endl << bowler->name << " to " << batsman->name << " OUT!" << endl << endl;
+
+}
+
+
+
+
+
+
+
+bool Game::validateInningsScore() {
+
+	if (isFirstInnings) {
+
+		if (battingTeam->wicketsLost == PlayersPerTeam || bowlingTeam->ballsBowled == maxBalls) {
+			
+			cout << "\t\t ||| FIRST INNINGS ENDS ||| " << endl << endl;
+			
+			cout << battingTeam->name << " " << battingTeam->totalRunsScored << " - "
+					<< battingTeam->wicketsLost << " (" << bowlingTeam->ballsBowled
+					<< ")" << endl;
+			
+			cout << bowlingTeam->name << " needs " << battingTeam->totalRunsScored + 1
+					<< " runs to win the match" << endl << endl;
+
+			return false;
+		}
+    } else { // Else 2nd innings
+
+    }
+
+	return true;
 }
 
 
