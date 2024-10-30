@@ -290,8 +290,19 @@ void Game::bat() {
 	bowler->ballsBowled = bowler->ballsBowled + 1;
 	bowlingTeam->ballsBowled = bowlingTeam->ballsBowled + 1;
 	bowler->runsGiven = bowler->runsGiven + runsScored;
+
+     if (runsScored != 0) {	// if runsScored = 1, 2, 3, 4, 5, or 6
+    	cout << endl << bowler->name << " to " << batsman->name << " " << runsScored << " runs!" << endl << endl;
+    } else { 	// else runScored = 0 and the batsman is ‘OUT’
     cout << endl << bowler->name << " to " << batsman->name << " OUT!" << endl << endl;
 
+    battingTeam->wicketsLost = battingTeam->wicketsLost + 1;
+    bowler->wicketsTaken = bowler->wicketsTaken + 1;
+
+    int nextPlayerIndex = battingTeam->wicketsLost;
+    batsman = &battingTeam->players[nextPlayerIndex];
+
+    }
 }
 
 
