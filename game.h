@@ -34,6 +34,9 @@ public:
     void playInnings();
     void bat();
     bool validateInningsScore();
+    void showGameScorecard();
+    void startSecondInnings();
+	void showMatchSummary();
 
 
 };

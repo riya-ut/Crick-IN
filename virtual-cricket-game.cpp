@@ -24,6 +24,9 @@ int main() {
     game.toss();
 
     game.startFirstInnings();
+    game.startSecondInnings();
+    game.showMatchSummary();
+
     
     return 0;
 }

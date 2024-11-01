@@ -254,10 +254,27 @@ void Game::startFirstInnings() {
     playInnings();
 }
 
+void Game::startSecondInnings() {
+
+	cout << "\t\t ||| SECOND INNINGS STARTS ||| " << endl << endl;
+
+	isFirstInnings = false;
+
+    // Swap battingTeam and bowlingTeam pointers
+    Team tempTeam = *battingTeam;
+    *battingTeam = *bowlingTeam;
+    *bowlingTeam = tempTeam;
+
+	// Select the batsman and the bowler for 2nd Innings
+    intializePlayers();
+    playInnings();
+}
+
 void Game::intializePlayers() {
     // Choose batsman and bowler: Intialize *batsman and *bowler
     batsman = &battingTeam->players[0];
     bowler = &bowlingTeam-> players[0];
+
     cout << battingTeam->name << " - " << batsman->name << " is batting " << endl;
 	cout << bowlingTeam->name << " - " << bowler->name << " is bowling " << endl << endl;
 }
@@ -293,23 +310,19 @@ void Game::bat() {
 
      if (runsScored != 0) {	// if runsScored = 1, 2, 3, 4, 5, or 6
     	cout << endl << bowler->name << " to " << batsman->name << " " << runsScored << " runs!" << endl << endl;
+        showGameScorecard();
     } else { 	// else runScored = 0 and the batsman is ‘OUT’
     cout << endl << bowler->name << " to " << batsman->name << " OUT!" << endl << endl;
-
     battingTeam->wicketsLost = battingTeam->wicketsLost + 1;
     bowler->wicketsTaken = bowler->wicketsTaken + 1;
+
+    showGameScorecard();
 
     int nextPlayerIndex = battingTeam->wicketsLost;
     batsman = &battingTeam->players[nextPlayerIndex];
 
     }
 }
-
-
-
-
-
-
 
 bool Game::validateInningsScore() {
 
@@ -330,10 +343,70 @@ bool Game::validateInningsScore() {
 		}
     } else { // Else 2nd innings
 
+        if (battingTeam->totalRunsScored > bowlingTeam->totalRunsScored) {	//Case1: If batting team score > bowling team score
+        	cout << battingTeam->name << " WON THE MATCH" << endl << endl;
+        	return false;
+        	//Case2: Batting team is all OUT OR Bowling team is done bowling
+        } else if (battingTeam->wicketsLost == PlayersPerTeam || bowlingTeam->ballsBowled == maxBalls) {
+            if (battingTeam->totalRunsScored < bowlingTeam->totalRunsScored) {
+            	cout << bowlingTeam->name << " WON THE MATCH" << endl << endl;
+            } else {
+            	cout << "MATCH DRAW" << endl << endl;
+            }
+            return false;
+        }
+
     }
 
 	return true;
 }
+
+void Game::showGameScorecard() {
+
+    cout << "--------------------------------------------------------------------------" << endl;
+
+    cout << "\t" << battingTeam->name << "  " << battingTeam->totalRunsScored << " - "
+      << battingTeam->wicketsLost << " (" << bowlingTeam->ballsBowled << ") | " << batsman->name
+      << " " << batsman->runsScored << " (" << batsman->ballsPlayed << ") \t" << bowler->name << " "
+	  << bowler->ballsBowled << " - " << bowler->runsGiven << " - " << bowler->wicketsTaken << "\t" << endl;
+
+    cout << "--------------------------------------------------------------------------" << endl << endl;
+}
+void Game::showMatchSummary() {
+
+	cout << "\t\t ||| MATCH ENDS ||| " << endl << endl;
+
+    cout << battingTeam->name << " " << battingTeam->totalRunsScored << "-" << battingTeam->wicketsLost << " (" << bowlingTeam->ballsBowled << ")" << endl;
+
+    cout << "==========================================" << endl;
+    cout << "| PLAYER \t BATTING \t BOWLING |" << endl;
+
+    for (int j = 0; j < PlayersPerTeam; j++) {
+    	Player player = battingTeam->players[j];
+    	cout << "|----------------------------------------|" << endl;
+    	cout << "| " << "[" << j << "] " << player.name << "  \t "
+        	<< player.runsScored << "(" << player.ballsPlayed << ") \t\t "
+			<< player.ballsBowled << "-" << player.runsGiven << "-"
+			<< player.wicketsTaken << "\t |" << endl;
+    }
+    cout << "==========================================" << endl << endl;
+
+    cout << bowlingTeam->name << " " << bowlingTeam->totalRunsScored << "-" << bowlingTeam->wicketsLost << " (" << battingTeam->ballsBowled << ")" << endl;
+
+    cout << "==========================================" << endl;
+    cout << "| PLAYER \t BATTING \t BOWLING |" << endl;
+
+    for (int i = 0; i < PlayersPerTeam; i++) {
+    	Player player = bowlingTeam->players[i];
+        cout << "|----------------------------------------|" << endl;
+        cout << "| " << "[" << i << "] " << player.name << "  \t "
+            << player.runsScored << "(" << player.ballsPlayed << ") \t\t "
+            << player.ballsBowled << "-" << player.runsGiven << "-"
+			<< player.wicketsTaken << "\t |" << endl;
+    }
+    cout << "==========================================" << endl << endl;
+}
+
 
 
 
